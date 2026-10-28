@@ -1,0 +1,20 @@
+# PlatformIO
+.pio/
+platformio_override.ini
+
+# VS Code: PlatformIO regenerates these with machine-specific paths
+.vscode/*
+!.vscode/extensions.json
+
+# Host test binaries
+build/
+
+# Python
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db

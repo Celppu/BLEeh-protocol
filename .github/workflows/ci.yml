@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  release:
+    types: [published]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest
+      - run: python -m pytest -q
+
+  firmware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-${{ hashFiles('nanobay/platformio.ini', 'tools/examples_build/platformio.ini') }}
+      - run: pip install platformio
+      - run: pio run -d nanobay
+      - run: pio run -d tools/examples_build
+
+  # On a GitHub release: attach the library as a zip for Arduino IDE
+  # (Sketch > Include Library > Add .ZIP Library).
+  library-zip:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build zip
+        run: |
+          mkdir -p dist/BLEeh
+          cp -r arduino/src arduino/examples arduino/library.properties arduino/library.json arduino/README.md dist/BLEeh/
+          cd dist && zip -r "BLEeh-${GITHUB_REF_NAME}.zip" BLEeh
+      - name: Upload to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" "dist/BLEeh-${GITHUB_REF_NAME}.zip"

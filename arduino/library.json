@@ -1,0 +1,13 @@
+{
+  "name": "BLEeh",
+  "version": "0.1.0",
+  "description": "Open RC link over standard BLE GATT: 16 channels, failsafe, telemetry and pairing. Receiver and transmitter for ESP32 (Arduino + NimBLE); portable protocol core for other BLE stacks.",
+  "keywords": ["rc", "ble", "receiver", "transmitter", "crsf", "edgetx", "telemetry", "robot"],
+  "repository": { "type": "git", "url": "https://github.com/Celppu/BLEeh.git" },
+  "license": "GPL-3.0-or-later",
+  "frameworks": "arduino",
+  "platforms": "espressif32",
+  "dependencies": {
+    "h2zero/NimBLE-Arduino": "^2.5.1"
+  }
+}

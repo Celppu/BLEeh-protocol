@@ -1,0 +1,41 @@
+{
+  "protocol": "BLEeh",
+  "version": 1,
+  "comment": "Reference frames for BLEeh v1. Every implementation (C++, Python, Kotlin, nRF...) must encode the inputs to exactly these bytes and decode the bytes back to the same values. Change only together with PROTOCOL.md.",
+  "uuids": {
+    "service": "b1ee0001-55eb-4435-bb6e-270656fee0da",
+    "rc": "b1ee0002-55eb-4435-bb6e-270656fee0da",
+    "telemetry": "b1ee0003-55eb-4435-bb6e-270656fee0da",
+    "capabilities": "b1ee0004-55eb-4435-bb6e-270656fee0da"
+  },
+  "rc": {
+    "flags": 1,
+    "sequence": 48879,
+    "channels": [172, 992, 1811, 0, 2047, 1000, 1234, 1500, 300, 400, 500, 600, 700, 800, 900, 1024],
+    "hex": "01efbeac00dfc401f07ff44993bb2c810c7db0c42b90110e80"
+  },
+  "telemetry": {
+    "sequence": 7,
+    "link": { "ack_sequence": 513, "uplink_lq": 98, "uplink_rssi": -61, "failsafe": true },
+    "battery": { "millivolts": 7420, "current_da": 15, "capacity_mah": 1234567, "remaining_pct": 80 },
+    "flight_mode": "ARMED",
+    "unknown": { "144": "010203" },
+    "vario_cms": -120,
+    "hex": "070105010262c3010208fc1c0f0087d61250070541524d45449003010203060288ff"
+  },
+  "capabilities": {
+    "protocol_version": 1,
+    "channel_count": 16,
+    "features": 3,
+    "telemetry_types": 6,
+    "name": "H-Bridge Car",
+    "hex": "0110030000000600482d42726964676520436172"
+  },
+  "adv_manufacturer": {
+    "comment": "Full manufacturer-specific data field: company ID 0xFFFF (little-endian), 'B' 'E', version, flags. Bleak and Android strip the company ID.",
+    "company_id": 65535,
+    "version": 1,
+    "flags": 1,
+    "hex": "ffff42450101"
+  }
+}
